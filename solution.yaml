@@ -1,0 +1,10 @@
+apiVersion: solution.sap/v1
+kind: Solution
+
+metadata:
+  name: yes-agent-46192
+  version: 1.0.3
+  description: A minimal test/demo AI agent that always replies "Yes" to every user message.
+
+assets:
+  - ref: ./assets/yes-agent/asset.yaml

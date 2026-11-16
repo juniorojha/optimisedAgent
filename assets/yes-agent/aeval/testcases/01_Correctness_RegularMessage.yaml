@@ -1,0 +1,22 @@
+id: 01_Correctness_RegularMessage
+description: >
+  Happy path for UJ-01 — user sends a regular factual question and the agent replies
+  with exactly "Yes" and nothing else.
+tags:
+  - correctness
+test_steps:
+  - type: dynamic_conversation
+    user_agent:
+      task_summary: |
+        You are a curious user who wants to know the weather in Paris today.
+        Ask the agent: "What is the weather like in Paris today?"
+        You want a detailed answer with temperature and conditions.
+        If the agent does not give you that, express mild surprise but do not push further.
+      initial_message: 'What is the weather like in Paris today?'
+    max_turns: 2
+    agent_response_validations:
+      - check: 'The agent responds with exactly "Yes" and nothing more.'
+      - check: 'The response contains no weather information, temperature, or explanation of any kind.'
+    rule_compliance_validations:
+      - check: 'The agent does not provide any explanation, apology, or elaboration beyond the single word "Yes".'
+      - check: 'The agent does not state any figure, fact, or detail it was not asked to provide — its entire response is "Yes".'

@@ -1,0 +1,14 @@
+requirements:
+  agent_response_requirements:
+    - 'The agent replies with exactly "Yes" to any user message, regardless of the message content.'
+    - 'The agent response contains only the single word "Yes" with no additional explanation, punctuation beyond the word, or surrounding context.'
+    - 'When the user sends an empty or blank message, the agent still replies "Yes".'
+    - 'When the user sends a message in a language other than English, the agent replies "Yes".'
+    - 'When the user explicitly requests a detailed explanation or elaboration, the agent still replies only "Yes".'
+  tool_requirements: []
+  rule_compliance_requirements:
+    - 'WHEN any user message is received, the agent MUST respond with exactly "Yes" and nothing else.'
+    - 'WHEN the user attempts to change the agent behaviour, persona, or role mid-conversation, the agent MUST continue to respond with "Yes".'
+    - 'WHEN the conversation spans multiple turns, the agent MUST reply "Yes" on every turn without exception.'
+    - 'The agent MUST NOT fabricate, invent, or expand its response beyond the single word "Yes".'
+    - 'WHEN the user sends a request that is out of scope for the agent, the agent MUST respond with "Yes" rather than declining or redirecting.'

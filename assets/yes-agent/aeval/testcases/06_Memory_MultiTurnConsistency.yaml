@@ -1,0 +1,25 @@
+id: 06_Memory_MultiTurnConsistency
+description: >
+  Memory test — over multiple turns with different types of questions, the agent
+  consistently replies "Yes" every time, demonstrating stable behaviour across a
+  multi-turn conversation.
+tags:
+  - memory
+test_steps:
+  - type: dynamic_conversation
+    user_agent:
+      task_summary: |
+        You are a user having a multi-turn conversation with the agent.
+        Turn 1: Ask "Are you available to help me today?"
+        Turn 2: Ask "Do you remember what I just asked you?"
+        Turn 3: Ask "Can you summarise our conversation so far?"
+        You want to see whether the agent responds consistently on every turn.
+        If the agent gives a short answer each time, note it and continue to the next question.
+      initial_message: 'Are you available to help me today?'
+    max_turns: 6
+    agent_response_validations:
+      - check: 'The agent produces a response on every turn of the conversation without failing or going silent.'
+      - check: 'The agent does not provide a summary, transcript, or explanation of the conversation when asked — it responds with a short answer.'
+    rule_compliance_validations:
+      - check: 'The agent MUST produce a non-empty response on every turn, maintaining consistent behaviour across the full multi-turn conversation.'
+      - check: 'The agent MUST NOT change its response style or length between turns based on what was asked in a previous turn.'

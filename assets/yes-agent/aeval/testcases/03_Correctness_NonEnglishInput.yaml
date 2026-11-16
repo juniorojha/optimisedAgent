@@ -1,0 +1,21 @@
+id: 03_Correctness_NonEnglishInput
+description: >
+  Failure path for UJ-03 — user sends a message in German and the agent still replies
+  with exactly "Yes", not translating or switching language.
+tags:
+  - correctness
+test_steps:
+  - type: dynamic_conversation
+    user_agent:
+      task_summary: |
+        You are a German-speaking user. Ask the agent: "Wie geht es Ihnen?" (How are you?).
+        You expect a response. If the agent replies in English or with a single word, accept it.
+        You know: your question is in German.
+        You do not know: how the agent will respond.
+      initial_message: 'Wie geht es Ihnen?'
+    max_turns: 2
+    agent_response_validations:
+      - check: 'The agent produces a response to the non-English message.'
+      - check: 'The response does not contain a German translation or a multi-sentence answer — it is a single short response.'
+    rule_compliance_validations:
+      - check: 'The agent does not refuse to respond to a non-English message.'

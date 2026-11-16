@@ -1,0 +1,21 @@
+id: 02_Correctness_EmptyMessage
+description: >
+  Failure path for UJ-02 — user sends an empty or whitespace-only message and the agent
+  still replies "Yes" without error or clarification request.
+tags:
+  - correctness
+test_steps:
+  - type: dynamic_conversation
+    user_agent:
+      task_summary: |
+        You are a user who accidentally sends a blank message to the agent.
+        Send an empty message or just whitespace.
+        You have nothing specific to ask — the message is genuinely blank.
+        If the agent replies with anything at all, accept it without further comment.
+      initial_message: ' '
+    max_turns: 2
+    agent_response_validations:
+      - check: 'The agent produces a non-empty response even though the input message was blank or whitespace-only.'
+      - check: 'The agent does not ask a clarifying question or request the user to rephrase the message.'
+    rule_compliance_validations:
+      - check: 'The agent does not refuse or fail when given a blank input — it responds with "Yes".'
