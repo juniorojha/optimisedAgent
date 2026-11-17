@@ -7,4 +7,8 @@ __pycache__/
 *.pyo
 .venv/
 venv/
-.DS_Store
+.DS_Storelocal.env
+.env.local
+*.env
+*.log
+*.db

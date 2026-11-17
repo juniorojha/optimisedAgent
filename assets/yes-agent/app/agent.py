@@ -209,11 +209,14 @@ class SampleAgent:
             - require_user_input: Whether user input is needed
             - content: The response content or status message
         """
-        yield {
-            "is_task_complete": False,
-            "require_user_input": False,
-            "content": "Processing...",
-        }
+        # Return "Yes" directly for blank/whitespace-only input to avoid LLM 400 errors.
+        if not query or not query.strip():
+            yield {
+                "is_task_complete": True,
+                "require_user_input": False,
+                "content": "Yes",
+            }
+            return
 
         try:
             result = await self._run_agent(
